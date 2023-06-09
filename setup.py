@@ -15,7 +15,7 @@ setuptools.setup(
     packages=['base_query_and_analytics'],
     install_requires=[
   'appdirs ==1.4.4',
-  'blas ==1.0',
+  'blas',
   'bottleneck ==1.3.4',
   'brotlipy ==0.7.0',
   'bzip2 ==1.0.8',
