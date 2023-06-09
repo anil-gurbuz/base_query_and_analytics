@@ -15,7 +15,6 @@ import plotly.figure_factory as ff
 from scipy.stats import ttest_ind
 from scipy.stats import t
 import statistics, math
-from scipy.stats.distributions import chi2
 from base_query_and_analytics.global_utils import generate_shifts, generate_shift_day
 
 # TODO: Add local_flt_int_df --> Filters will only generate NAs for interpolated values to av
@@ -243,8 +242,8 @@ class Analytics():
         ci_mean = (mean_lix, mean_uix)
 
         # ci_std
-        std_lix = s * np.sqrt(dof / chi2.ppf((confidence) / 2, dof))
-        std_uix = s * np.sqrt(dof / chi2.ppf((1 - confidence) / 2, dof))
+        std_lix = s * np.sqrt(dof / t.distributions.chi2.ppf((confidence) / 2, dof))
+        std_uix = s * np.sqrt(dof / t.distributions.chi2.ppf((1 - confidence) / 2, dof))
         ci_std = (round(std_lix, 2), round(std_uix, 2))
 
         # ci_median

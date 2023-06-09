@@ -26,7 +26,6 @@ identifier = time.localtime()
 identifier = f"{identifier.tm_yday}__{identifier.tm_hour}_{identifier.tm_min}"
 
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)
 
 # <editor-fold desc="Helper Funcitons">
 # Save the object
