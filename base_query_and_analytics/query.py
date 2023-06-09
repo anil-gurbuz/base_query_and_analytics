@@ -9,8 +9,8 @@ import PIconnect as PI
 import pandas as pd
 from tqdm import tqdm
 
-from preprocessor import Preprocessor
-from preprocessor import QueryArtifacts
+from base_query_and_analytics.preprocessor import Preprocessor
+from base_query_and_analytics.preprocessor import QueryArtifacts
 
 try:
     import OSIsoft

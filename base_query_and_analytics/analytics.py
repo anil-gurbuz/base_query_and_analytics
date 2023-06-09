@@ -1,16 +1,14 @@
 import logging
-import time
 import itertools
 import numpy as np
 import pandas as pd
 import warnings
 import yaml
-from query import savePresentableCSV, simplifyTagNames
+from base_query_and_analytics.query import savePresentableCSV, simplifyTagNames
 from jinja2 import FileSystemLoader, Environment
 from tqdm import tqdm
 
 warnings.simplefilter(action='ignore', category=UserWarning)
-import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.figure_factory as ff
@@ -18,7 +16,7 @@ from scipy.stats import ttest_ind
 from scipy.stats import t
 import statistics, math
 from scipy.stats.distributions import chi2
-from global_utils import generate_shifts, generate_shift_day
+from base_query_and_analytics.global_utils import generate_shifts, generate_shift_day
 
 # TODO: Add local_flt_int_df --> Filters will only generate NAs for interpolated values to av
 
