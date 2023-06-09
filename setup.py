@@ -14,7 +14,12 @@ setuptools.setup(
     url='https://newcrestmining.visualstudio.com/Cadia%20PCA/_git/base_query_and_analytics',
     packages=['base_query_and_analytics'],
     install_requires=[
+      'colorama ==0.4.4',
+      'tqdm ==4.64.0'
+    ],
+    conda_deps=[
   'appdirs ==1.4.4',
+  'blas',
   'bottleneck ==1.3.4',
   'brotlipy ==0.7.0',
   'bzip2 ==1.0.8',
@@ -78,4 +83,9 @@ setuptools.setup(
   'colorama ===0.4.4',
   'tqdm ===4.64.0',
 ],
+    conda_channel=[
+      'plotly',
+      'conda - forge',
+      'anaconda',
+      'defaults']
 )
