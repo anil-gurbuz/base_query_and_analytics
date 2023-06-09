@@ -4,8 +4,6 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-style_talk = 'seaborn-talk'  # refer to plt.style.available
-
 import plotly
 from plotly import express as px
 import plotly.graph_objects as go
