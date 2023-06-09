@@ -24,11 +24,6 @@ def load_yml(file_name):
     with open(file_name, "r") as file:
         return yaml.full_load(file)
 
-blue='#63a0cb'
-pink = '#ffb2c8'
-green = "#008000"
-red = '#ff0000'
-blue2 = "#b1b6fc" # Original data
 
 class Analytics():
     """
@@ -78,6 +73,11 @@ class Analytics():
         assert not (analytics_conf_path is None and settings_dict is None), "Either analytics_conf_path or settings_dict should be provided"
         self.analytics_conf = AnalyticsConfig(analytics_conf_path=analytics_conf_path, settings_dict=settings_dict)
 
+        blue = '#63a0cb'
+        pink = '#ffb2c8'
+        green = "#008000"
+        red = '#ff0000'
+        blue2 = "#b1b6fc"  # Original data
         self.visual_conf = VisualConfig(groups=self.groups, colors=['olive',blue,red,'DarkOliveGreen',green,red])
         self._generate_local_flt_int_df()
         self._create_agg_dfs()
