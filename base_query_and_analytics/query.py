@@ -395,7 +395,7 @@ class Query():
             self.raw_int_df.DateTime = one_tag_series.index
             self.all_found_tags += [tag_names[self.interpolated_tag_idx]]
             self.found_tag_descriptions[tag_names[self.interpolated_tag_idx]] = tag.description
-            self.found_tag_dtypes[tag_names[self.interpolated_tag_idx]] = tag.pi_point.PointType
+            self.found_tag_dtypes[tag_names[self.interpolated_tag_idx]] = str(tag.pi_point.PointType)
             self.interpolated_tag_idx += 1
             pbar.update(1)
 
