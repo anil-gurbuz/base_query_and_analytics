@@ -428,7 +428,7 @@ class Query():
             assert self.raw_int_df.shape[0] == one_tag_series.shape[0], "Series and DF doesn't have same number of rows"
 
 
-        if tag.raw_attributes['pointtype'] in ([6,8,12]):
+        if tag.raw_attributes['pointtype'] in ([6,8,12]) or "Float" in str(tag.raw_attributes['pointtype']) or "Digital" in str(tag.raw_attributes['pointtype']):
             self.raw_int_df[tag_name] = pd.to_numeric(one_tag_series, errors='coerce')
             self.continuous.append(tag_name)
         else:
