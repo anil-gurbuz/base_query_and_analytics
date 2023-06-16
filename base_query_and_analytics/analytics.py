@@ -78,7 +78,8 @@ class Analytics():
         red = '#ff0000'
         blue2 = "#b1b6fc"  # Original data
         self.visual_conf = VisualConfig(groups=self.groups, colors=['olive',blue,red,'DarkOliveGreen',green,red])
-        self._generate_local_flt_int_df()
+        if analytics_conf_path is not None:
+            self._generate_local_flt_int_df()
         self._create_agg_dfs()
 
         # attribute to store local filters as boolean to show in removed graph
