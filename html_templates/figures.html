@@ -1,0 +1,6 @@
+<div class="content">
+    {% for tag in tags %}
+    <h1 id="title-{{tag.tag}}"> {{tag.rolled_back_tag}} - {{tag.desc}} </h1>
+    {{tag.fig}}
+    {% endfor %}
+</div>

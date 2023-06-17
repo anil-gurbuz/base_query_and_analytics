@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name='base_query_and_analytics',
-    version='0.0.9',
+    version='0.1.0',
     author='Anil Gurbuz',
     author_email='anil.gurbuz@newcrest.com.au',
     description='Utilities for querying and analytics',

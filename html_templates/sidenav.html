@@ -1,0 +1,6 @@
+<div class="sidenav">
+    <a href="#title-intro"> Introduction</a>
+    {% for tag in tags %}
+    <a href="#title-{{tag.tag}}"> {{tag.rolled_back_tag}}- {{tag.desc}}</a>
+    {% endfor %}
+</div>

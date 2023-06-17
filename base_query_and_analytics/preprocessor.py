@@ -161,9 +161,8 @@ class Preprocessor():
         self.query.all_tags = self.query.all_found_tags + self.query.all_generated_tags
 
         # Categorical / Continuous
-        self.query.continuous = [k for (k, v) in self.query.found_tag_dtypes.items() if
-                                 v in [6, 8, 11, 12, 13]]  # 6 & 8 integer, 11-12-13 float
-        self.query.categorical = [k for (k, v) in self.query.found_tag_dtypes.items() if v in [101, 105]] + ["g"]
+        self.query.continuous = [k for (k, v) in self.query.found_tag_dtypes.items() if v in [6, 8, 11, 12, 13] + ['6', '8', '11', '12', '13'] or "Float" in v]  # 6 & 8 integer, 11-12-13 float
+        self.query.categorical = [k for (k, v) in self.query.found_tag_dtypes.items() if v in [101, 105]+ ['101', '105'] or "Digital" in v] + ["g"]
 
         # Logical Groups
         self.query.pv = [tag for tag in self.query.all_found_tags if tag.endswith("_pv")]

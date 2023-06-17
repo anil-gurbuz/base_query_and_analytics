@@ -13,7 +13,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.figure_factory as ff
 from scipy.stats import ttest_ind
-from scipy.stats import t
+from scipy.stats import chi2, t
 import statistics, math
 from base_query_and_analytics.global_utils import generate_shifts, generate_shift_day
 
@@ -78,8 +78,7 @@ class Analytics():
         red = '#ff0000'
         blue2 = "#b1b6fc"  # Original data
         self.visual_conf = VisualConfig(groups=self.groups, colors=['olive',blue,red,'DarkOliveGreen',green,red])
-        if analytics_conf_path is not None:
-            self._generate_local_flt_int_df()
+        self._generate_local_flt_int_df()
         self._create_agg_dfs()
 
         # attribute to store local filters as boolean to show in removed graph
@@ -243,8 +242,8 @@ class Analytics():
         ci_mean = (mean_lix, mean_uix)
 
         # ci_std
-        std_lix = s * np.sqrt(dof / t.distributions.chi2.ppf((confidence) / 2, dof))
-        std_uix = s * np.sqrt(dof / t.distributions.chi2.ppf((1 - confidence) / 2, dof))
+        std_lix = s * np.sqrt(dof / chi2.ppf((confidence) / 2, dof))
+        std_uix = s * np.sqrt(dof / chi2.ppf((1 - confidence) / 2, dof)) # t.distributions.chi2.
         ci_std = (round(std_lix, 2), round(std_uix, 2))
 
         # ci_median
@@ -557,19 +556,16 @@ class AnalyticsConfig:
         """
         if analytics_conf_path is None:
             assert settings_dict is not None , "Either analytics_conf_path or settings_dict should be provided"
-            self.default_settings = settings_dict["default_settings"]
-            self.output_settings = settings_dict["output_settings"]
-
         else:
             print("analytics config file path is provided -- Overriding dictionaries if provided")
-            self.settings = load_yml(analytics_conf_path)
-            self.default_settings = self.settings["default_settings"]
-            self.custom_settings = self.settings["custom_settings"]
-            self.output_settings = self.settings["output_settings"]
-            del self.settings
+            settings_dict = load_yml(analytics_conf_path)
 
-            self.ignore_global_flt_tags = []
-            if self.custom_settings is not None:
-                self.ignore_global_flt_tags = [tag for tag, tag_settings_dict in self.custom_settings.items() if tag_settings_dict["agg"]["ignore_global_filter"]]
+        self.default_settings = settings_dict["default_settings"]
+        self.custom_settings = settings_dict["custom_settings"]
+        self.output_settings = settings_dict["output_settings"]
+
+        self.ignore_global_flt_tags = []
+        if self.custom_settings is not None:
+            self.ignore_global_flt_tags = [tag for tag, tag_settings_dict in self.custom_settings.items() if tag_settings_dict["agg"]["ignore_global_filter"]]
 
 

@@ -441,20 +441,6 @@ class Query():
             self.categorical.append(tag_name)
             logging.warning(f"Datatype for the {tag_name} is found {tag.raw_attributes['pointtype']} hence considered as categorical variable and stored as string!")
 
-        #
-        # try:
-        #     self.raw_int_df[tag_name] = one_tag_series.astype("float64")
-        #     self.continuous.append(tag_name)
-        # except ValueError as err:
-        #     try:
-        #         self.raw_int_df[tag_name] = one_tag_series.astype(str)
-        #     except:
-        #         one_tag_series.name = tag_name
-        #         self.raw_int_df = pd.merge(self.raw_int_df, one_tag_series, how="left", left_index=True, right_index=True)
-        #
-        #     self.categorical.append(tag_name)
-        #     logging.warning(f"While trying to convert {tag_name} to float, BELOW exception is captured and {tag_name} stored as a string")
-        #     logging.info(err)
 
     def _setGroupsOfDateTime(self, interpolated):
         if interpolated:
