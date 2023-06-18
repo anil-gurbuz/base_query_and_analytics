@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url='https://newcrestmining.visualstudio.com/Cadia%20PCA/_git/base_query_and_analytics',
     packages=['base_query_and_analytics'],
-    package_data={'':['html_templates/', 'styles\\']},
+    package_data={'':['html_templates', 'styles']},
     include_package_data=True,
     install_requires=[
       'colorama ==0.4.4',
