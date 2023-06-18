@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import warnings
 import yaml
+import os
 from base_query_and_analytics.query import savePresentableCSV, simplifyTagNames
 from jinja2 import FileSystemLoader, Environment
 from tqdm import tqdm
@@ -498,10 +499,17 @@ class Analytics():
         savePresentableCSV(self.__getattribute__(df_attr_name).copy(), f"{df_attr_name}.csv", remove_g=True,
                            keep_index=False)
 
-    def save_output_figures(self, tag_list, html_template_file_name='base.html', html_templates_dir="html_templates", project_name_extension=""):
+    def save_output_figures(self, tag_list,  project_name_extension="", html_template_file_name=None, html_templates_dir=None):
         '''
         Only accepts numerical variables in tag_list
         '''
+        if html_templates_dir is None:
+            html_templates_dir = os.path.join(__file__, "..", "html_templates")
+            assert os.path.isdir(html_templates_dir), f"html_templates_dir {html_templates_dir} is not a valid directory"
+
+        if html_template_file_name is None:
+            html_template_file_name = 'base.html'
+            assert os.path.isfile(os.path.join(html_templates_dir, html_template_file_name)), f"html_template_file_name {html_template_file_name} is not a valid file"
 
         tags = [{'tag' : tag, 'rolled_back_tag': self.q.artifacts.rolledback_tag_mapper[tag], 'desc': self.q.artifacts.description_mapper[tag], 'fig': self._generate_plots_for_one_tag(tag, marker_agg_level=self.analytics_conf.output_settings['marker_agg_level'], line_agg_level=self.analytics_conf.output_settings['line_agg_level'], ci_level=self.analytics_conf.output_settings["ci_level"]).to_html(full_html=False, include_plotlyjs='cdn')} for tag in tqdm(tag_list) if tag not in self.q.artifacts.categorical]
 
