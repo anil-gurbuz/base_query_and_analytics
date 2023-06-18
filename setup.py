@@ -5,14 +5,16 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name='base_query_and_analytics',
-    version='0.1.3',
+    version='0.1.4',
     author='Anil Gurbuz',
     author_email='anil.gurbuz@newcrest.com.au',
     description='Utilities for querying and analytics',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://newcrestmining.visualstudio.com/Cadia%20PCA/_git/base_query_and_analytics',
-    packages=['base_query_and_analytics', 'base_query_and_analytics/html_templates', 'base_query_and_analytics/styles'],
+    packages=['base_query_and_analytics'],
+    package_data={'':['html_templates/', 'styles\\']},
+    include_package_data=True,
     install_requires=[
       'colorama ==0.4.4',
       'tqdm ==4.64.0'
