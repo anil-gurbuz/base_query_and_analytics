@@ -499,10 +499,14 @@ class Analytics():
         savePresentableCSV(self.__getattribute__(df_attr_name).copy(), f"{df_attr_name}.csv", remove_g=True,
                            keep_index=False)
 
-    def save_output_figures(self, tag_list,  project_name_extension="", html_template_file_name=None, html_templates_dir=None):
+    def save_output_figures(self, tag_list, save_folder='.', project_name_extension="", html_template_file_name=None, html_templates_dir=None):
         '''
         Only accepts numerical variables in tag_list
         '''
+
+        if not os.path.isdir(save_folder):
+            os.mkdir(save_folder)
+
         if html_templates_dir is None:
             html_templates_dir = os.path.join(__file__, "..", "html_templates")
             assert os.path.isdir(html_templates_dir), f"html_templates_dir {html_templates_dir} is not a valid directory"
@@ -530,7 +534,7 @@ class Analytics():
 
         # html_first_page = self.first_page_html()
 
-        with open(f'{self.analytics_conf.output_settings["project_name"] + project_name_extension}.html', 'w') as f:
+        with open(f'{save_folder}\\{self.analytics_conf.output_settings["project_name"] + project_name_extension}.html', 'w') as f:
             f.write(output)
             f.close()
 
