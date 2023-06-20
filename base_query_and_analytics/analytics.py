@@ -493,10 +493,10 @@ class Analytics():
 
         return one_tag_plots
 
-    def save_df_as_csv(self, df_attr_name=None):
+    def save_df_as_csv(self, folder_path, df_attr_name=None):
         if df_attr_name is None:
             df_attr_name = f"raw_agg_df_{self.analytics_conf.output_settings['marker_agg_level']}"
-        savePresentableCSV(self.__getattribute__(df_attr_name).copy(), f"{df_attr_name}.csv", remove_g=True,
+        savePresentableCSV(self.__getattribute__(df_attr_name).copy(), f"{folder_path}\\{df_attr_name}.csv", remove_g=True,
                            keep_index=False)
 
     def save_output_figures(self, tag_list, save_folder='.', project_name_extension="", html_template_file_name=None, html_templates_dir=None):
