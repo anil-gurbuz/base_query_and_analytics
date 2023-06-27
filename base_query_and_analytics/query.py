@@ -776,3 +776,15 @@ class Query():
 
         return q
 
+    def apply_global_filter(self, filter_string):
+        """
+        Only supports interpolated values not recorded values
+        """
+        self.global_filter = filter_string
+        parsed_filter = [[simplifyTagNames(flt.split()[0], True).strip(), flt.split()[1].strip(), flt.split()[2].strip()] for flt in filter_string.split(",")] if type(filter_string) == str else filter_string
+        self.global_flt_int_df = self.raw_int_df.copy()
+
+        operators_dict = {"<" : (lambda x, y: x < y), ">": (lambda x, y: x > y), "=": (lambda x, y: x == y),
+                          "<=": (lambda x, y: x <= y), ">=": (lambda x, y: x >= y), "!=": (lambda x, y: x != y)}
+        for tag, operator, value in parsed_filter :
+            self.global_flt_int_df = self.global_flt_int_df.loc[operators_dict[operator](self.global_flt_int_df[tag], pd.to_numeric(value, errors="ignore")),]
